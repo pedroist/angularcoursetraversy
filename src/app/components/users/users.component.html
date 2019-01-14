@@ -15,8 +15,11 @@
         <!--img *ngIf="user.image" class="img-fluid" bind-src="user.image" alt=""-->
       </div>
       <div class="col-sm-8">
-          <h3 [ngStyle]="currentStyles">{{ user.firstName }} {{ user.lastName }}</h3>
-          <ul class="list-group" *ngIf="showExtended && user.age && user.address">
+          <h3 [ngStyle]="currentStyles">
+            {{ user.firstName }} {{ user.lastName }}
+            <small><button (click)="toogleHide(user)" class="btn btn-dark btn-sm">Toogle</button></small>
+          </h3>
+          <ul class="list-group" *ngIf="!user.hide && user.age && user.address">
             <li class="list-group-item">{{ user.age }}</li>
             <li class="list-group-item">
               Address: {{ user.address.street }} {{ user.address.city }},
