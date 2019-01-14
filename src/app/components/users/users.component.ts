@@ -92,7 +92,7 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  toogleHide(user: User) {
-    user.hide = !user.hide;
-  }
+  // toogleHide(user: User) {
+  //   user.hide = !user.hide;
+  // }
 }

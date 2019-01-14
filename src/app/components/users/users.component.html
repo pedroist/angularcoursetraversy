@@ -17,7 +17,7 @@
       <div class="col-sm-8">
           <h3 [ngStyle]="currentStyles">
             {{ user.firstName }} {{ user.lastName }}
-            <small><button (click)="toogleHide(user)" class="btn btn-dark btn-sm">Toogle</button></small>
+            <small><button (click)="user.hide = !user.hide" class="btn btn-dark btn-sm">Toogle</button></small>
           </h3>
           <ul class="list-group" *ngIf="!user.hide && user.age && user.address">
             <li class="list-group-item">{{ user.age }}</li>
