@@ -11,12 +11,7 @@ export class UsersComponent implements OnInit {
   user: User = {
     firstName: '',
     lastName: '',
-    age: null,
-    address: {
-      street: '',
-      city: '',
-      state: ''
-    }
+    email: ''
   };
   users: User[];
   showExtended: boolean = true;
@@ -33,12 +28,7 @@ export class UsersComponent implements OnInit {
       {
         firstName: "Karolina",
         lastName: "Wasavaska",
-        age: 70,
-        address: {
-          street: "50 Main st",
-          city: "Boston",
-          state: "MA"
-        },
+        email: 'karolina@gmail.com',
         image: "http://lorempixel.com/600/600/people/7",
         isActive: true,
         registered: new Date('01/02/2018 08:30:00'),
@@ -47,12 +37,7 @@ export class UsersComponent implements OnInit {
       {
         firstName: "Kevin",
         lastName: "Johnson",
-        age: 34,
-        address: {
-          street: "20 School st",
-          city: "Lynn",
-          state: "MA"
-        },
+        email: 'kevin@yahoo.com',
         image: "http://lorempixel.com/600/600/people/2",
         isActive: false,
         registered: new Date('03/11/2017 06:20:00'),
@@ -61,12 +46,7 @@ export class UsersComponent implements OnInit {
       {
         firstName: "Karen",
         lastName: "William",
-        age: 26,
-        address: {
-          street: "50 Mill st",
-          city: "Miami",
-          state: "FL"
-        },
+        email: 'karen@gmail.com',
         image: "http://lorempixel.com/600/600/people/9",
         isActive: true,
         registered: new Date('11/02/2016 10:30:00'),
@@ -97,15 +77,11 @@ export class UsersComponent implements OnInit {
     this.user.hide = true;
     this.users.unshift(this.user); //The same as push put adds to the beggining of array
 
+    //Important!!: we need to reset user, otherwise, changing the inputs will change the values already saved in array
     this.user = {
       firstName: '',
       lastName: '',
-      age: null,
-      address: {
-        street: '',
-        city: '',
-        state: ''
-      }
+      email: '',
     }
   }
   setCurrentClasses() {
@@ -129,10 +105,5 @@ export class UsersComponent implements OnInit {
   onSubmit(e) {
     console.log(123);
     e.preventDefault();
-  }
-
-  fireEvent(e) {
-    console.log(e.type);
-    console.log(e.target.value);
   }
 }
