@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 
 import { User } from "../../models/User";
 
@@ -20,6 +20,7 @@ export class UsersComponent implements OnInit {
   currentClasses = {};
   currentStyles = {};
   showUserForm: boolean = false;
+  @ViewChild('userForm') form: any;
 
   constructor() { }
 
@@ -65,25 +66,25 @@ export class UsersComponent implements OnInit {
     this.setCurrentStyles();
   }
 
-  addUser() {
-    /* Extra Imagens PTC */
-    let randomNumb: number = null;
-    randomNumb = Math.floor(Math.random() * 10) + 1;
-    this.user.image = "http://lorempixel.com/600/600/people/" + randomNumb;
-    /*End Extra Imagens PTC */
+  // addUser() {
+  //   /* Extra Imagens PTC */
+  //   let randomNumb: number = null;
+  //   randomNumb = Math.floor(Math.random() * 10) + 1;
+  //   this.user.image = "http://lorempixel.com/600/600/people/" + randomNumb;
+  //   /*End Extra Imagens PTC */
 
-    this.user.isActive = true;
-    this.user.registered = new Date();
-    this.user.hide = true;
-    this.users.unshift(this.user); //The same as push put adds to the beggining of array
+  //   this.user.isActive = true;
+  //   this.user.registered = new Date();
+  //   this.user.hide = true;
+  //   this.users.unshift(this.user); //The same as push put adds to the beggining of array
 
-    //Important!!: we need to reset user, otherwise, changing the inputs will change the values already saved in array
-    this.user = {
-      firstName: '',
-      lastName: '',
-      email: '',
-    }
-  }
+  //   //Important!!: we need to reset user, otherwise, changing the inputs will change the values already saved in array
+  //   this.user = {
+  //     firstName: '',
+  //     lastName: '',
+  //     email: '',
+  //   }
+  // }
   setCurrentClasses() {
     this.currentClasses = {
       'btn-success': this.enableAdd,
@@ -102,8 +103,25 @@ export class UsersComponent implements OnInit {
   //   user.hide = !user.hide;
   // }
 
-  onSubmit(e) {
-    console.log(123);
-    e.preventDefault();
+  onSubmit({ value, valid }: { value: User, valid: boolean }) {
+    debugger;
+    if (!valid) {
+      console.log('Form is not valid');
+    } else {
+      /* Extra Imagens PTC */
+      let randomNumb: number = null;
+      randomNumb = Math.floor(Math.random() * 10) + 1;
+      value.image = "http://lorempixel.com/600/600/people/" + randomNumb;
+      /*End Extra Imagens PTC */
+
+      value.isActive = true;
+      value.registered = new Date();
+      value.hide = true;
+      this.users.unshift(value);
+
+      //Important!!: we need to reset user, otherwise, changing the inputs will change the values already saved in array
+      this.form.reset();
+
+    }
   }
 }
