@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-
+import { DataService } from '../../services/data.service';
 import { User } from "../../models/User";
 
 @Component({
@@ -22,38 +22,11 @@ export class UsersComponent implements OnInit {
   showUserForm: boolean = false;
   @ViewChild('userForm') form: any;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.users = [
-      {
-        firstName: "Karolina",
-        lastName: "Wasavaska",
-        email: 'karolina@gmail.com',
-        image: "http://lorempixel.com/600/600/people/7",
-        isActive: true,
-        registered: new Date('01/02/2018 08:30:00'),
-        hide: true
-      },
-      {
-        firstName: "Kevin",
-        lastName: "Johnson",
-        email: 'kevin@yahoo.com',
-        image: "http://lorempixel.com/600/600/people/2",
-        isActive: false,
-        registered: new Date('03/11/2017 06:20:00'),
-        hide: true
-      },
-      {
-        firstName: "Karen",
-        lastName: "William",
-        email: 'karen@gmail.com',
-        image: "http://lorempixel.com/600/600/people/9",
-        isActive: true,
-        registered: new Date('11/02/2016 10:30:00'),
-        hide: true
-      }
-    ];
+
+    this.users = this.dataService.getUsers();
 
     this.loaded = true;
 
@@ -104,7 +77,6 @@ export class UsersComponent implements OnInit {
   // }
 
   onSubmit({ value, valid }: { value: User, valid: boolean }) {
-    debugger;
     if (!valid) {
       console.log('Form is not valid');
     } else {
@@ -117,7 +89,9 @@ export class UsersComponent implements OnInit {
       value.isActive = true;
       value.registered = new Date();
       value.hide = true;
-      this.users.unshift(value);
+      //this.users.unshift(value); //substituído pelo Service
+
+      this.dataService.addUser(value);
 
       //Important!!: we need to reset user, otherwise, changing the inputs will change the values already saved in array
       this.form.reset();
