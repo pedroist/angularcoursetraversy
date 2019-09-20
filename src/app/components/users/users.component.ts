@@ -8,11 +8,15 @@ import { User } from "../../models/User";
   styleUrls: ["./users.component.css"]
 })
 export class UsersComponent implements OnInit {
-  user: User = {
-    firstName: '',
-    lastName: '',
-    email: ''
-  };
+  /* Não é necessário pois usamos o evento ngSubmit em vez de onClick
+    Neste caso podemos também substituir no template  [(ngModel)]="user.email" por apenas ngModel
+    (obrigatório ter ngModel mesmo que nao se use a variavel this.user)
+  */
+  // user: User = {
+  //   firstName: '',
+  //   lastName: '',
+  //   email: ''
+  // };
   users: User[];
   showExtended: boolean = true;
   loaded: boolean = false;
@@ -82,6 +86,7 @@ export class UsersComponent implements OnInit {
   // }
 
   onSubmit({ value, valid }: { value: User, valid: boolean }) {
+    debugger;
     if (!valid) {
       console.log('Form is not valid');
     } else {

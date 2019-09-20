@@ -5,8 +5,18 @@
     <!--FirstName-->
     <div class="form-group">
       <label>First Name</label>
-      <input type="text" [(ngModel)]="user.firstName" [ngClass]="{'is-invalid': userFirstName.errors && userFirstName.touched}"
-        class="form-control" name="firstName" #userFirstName="ngModel" required minlength="2">
+      <!--NOTA:
+        [(ngModel)]="user.firstName" em vez de apenas ngModel caso usássemos a variável 
+        this.user.firstName no component através de onClick em vez de ngSubmit
+      -->
+      <input
+        type="text"
+        [ngClass]="{'is-invalid': userFirstName.errors && userFirstName.touched}"
+        class="form-control"
+        name="firstName"
+        ngModel
+        #userFirstName="ngModel"
+        required minlength="2">
       <!--FirstName - Mensagens erro -->
       <div [hidden]="!userFirstName.errors?.required" class="invalid-feedback">
         First name required
@@ -15,11 +25,19 @@
         Must be at least 2 characters
       </div>
     </div>
+
     <!--LastName-->
     <div class="form-group">
       <label>Last Name</label>
-      <input type="text" [(ngModel)]="user.lastName" [ngClass]="{'is-invalid': userLastName.errors && userLastName.touched}"
-        class="form-control" name="lastName" #userLastName="ngModel" required minlength="2">
+      <input
+        type="text" 
+        [ngClass]="{'is-invalid': userLastName.errors && userLastName.touched}"
+        class="form-control"
+        name="lastName"
+        ngModel
+        #userLastName="ngModel"
+        required 
+        minlength="2">
       <!--LastName - Mensagens erro -->
       <div [hidden]="!userLastName.errors?.required" class="invalid-feedback">
         Last name required
@@ -28,11 +46,19 @@
         Must be at least 2 characters
       </div>
     </div>
+
     <!--Email-->
     <div class="form-group">
       <label>Email</label>
-      <input type="email" [(ngModel)]="user.email" [ngClass]="{'is-invalid': userEmail.errors && userEmail.touched}"
-        class="form-control" name="email" #userEmail="ngModel" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+      <input
+        type="email"
+        [ngClass]="{'is-invalid': userEmail.errors && userEmail.touched}"
+        class="form-control"
+        name="email"
+        ngModel
+        #userEmail="ngModel"
+        required
+        pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
       <!--pattern property up is new in HTML5-->
       <!--Email - Mensagens erro -->
       <div [hidden]="!userEmail.errors?.required" class="invalid-feedback">
@@ -42,6 +68,7 @@
         Email is not valid
       </div>
     </div>
+    
     <!--Submit Button-->
     <button [disabled]="!userForm.form.valid" class="btn btn-block mb-3">
       Add New User</button>
