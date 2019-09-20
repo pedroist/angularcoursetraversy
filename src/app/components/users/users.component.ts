@@ -86,6 +86,7 @@ export class UsersComponent implements OnInit {
   // }
 
   onSubmit({ value, valid }: { value: User, valid: boolean }) {
+    debugger;
     if (!valid) {
       console.log('Form is not valid');
     } else {
