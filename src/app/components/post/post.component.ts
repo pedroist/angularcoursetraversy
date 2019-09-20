@@ -22,7 +22,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');//o 'id' é o nome atribuído no app-routing module
     // NOTA: +"string" converte para number caso seja possível, senão NaN
-    debugger;
+
     this.postService.getPost(id).subscribe(post => this.post = post);
   }
 
