@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, EventEmitter, Output, Input } from '@angular/core';
 import { PostService } from '../../services/post.service'
 
 import { Post } from '../../models/Post';
@@ -9,7 +9,7 @@ import { isContextDirty } from '@angular/core/src/render3/styling';
   templateUrl: './post-form.component.html',
   styleUrls: ['./post-form.component.css']
 })
-export class PostFormComponent implements OnInit {
+export class PostFormComponent implements OnInit, OnChanges {
   @Output() newPost: EventEmitter<Post> = new EventEmitter();
   @Output() updatedPost: EventEmitter<Post> = new EventEmitter();
   @Input() currentPost: Post;
@@ -18,6 +18,11 @@ export class PostFormComponent implements OnInit {
   constructor(private postService: PostService) { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // changes.prop contains the old and the new value...
+    console.log("post-form ngOnChanges: ", changes);
   }
 
   addPost(title, body) {
@@ -36,7 +41,7 @@ export class PostFormComponent implements OnInit {
     } else {
       this.postService.updatePost({ title, body, id } as Post)
         .subscribe(post => {
-          console.log(post);
+          console.log("update post to: ", post);
           this.isEdit = false;
           this.updatedPost.emit(post);
         });

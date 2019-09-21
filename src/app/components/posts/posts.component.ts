@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { PostService } from '../../services/post.service'
 
 import { Post } from '../../models/Post';
@@ -8,7 +8,7 @@ import { Post } from '../../models/Post';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnChanges {
   posts: Post[];
   currentPost: Post = {
     id: 0,
@@ -18,6 +18,10 @@ export class PostsComponent implements OnInit {
   isEdit: boolean = false;
 
   constructor(private postService: PostService) { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("posts ngOnChanges: ", changes);
+  }
 
   ngOnInit() {
     this.postService.getPosts().subscribe(posts => {
