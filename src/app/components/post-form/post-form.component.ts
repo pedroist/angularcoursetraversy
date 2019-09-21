@@ -30,12 +30,16 @@ export class PostFormComponent implements OnInit {
     }
   }
 
-  updatePost() {
-    this.postService.updatePost(this.currentPost)
-      .subscribe(post => {
-        console.log(post);
-        this.isEdit = false;
-        this.updatedPost.emit(post);
-      });
+  updatePost(title, body, id) {
+    if (!title || !body) {
+      alert('Please add post');
+    } else {
+      this.postService.updatePost({ title, body, id } as Post)
+        .subscribe(post => {
+          console.log(post);
+          this.isEdit = false;
+          this.updatedPost.emit(post);
+        });
+    }
   }
 }
